@@ -35,6 +35,10 @@
  *
  */
 
+#ifdef _MSC_VER
+#define FILE_LOCAL static
+#define PREFIX 
+#endif
 
 struct fppTag {
   int tag;
