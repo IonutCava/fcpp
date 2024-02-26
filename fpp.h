@@ -35,10 +35,7 @@
  *
  */
 
-#ifdef _MSC_VER
-#define FILE_LOCAL static
-#define PREFIX 
-#endif
+#include "cppdef.h"
 
 struct fppTag {
   int tag;
@@ -159,5 +156,8 @@ struct fppTag {
 
 /* Switch on WWW-mode */
 #define FPPTAG_WEBMODE 33
+
+/* Depends function: */
+#define FPPTAG_DEPENDS 34 /* data is an depends funtion */
 
 int PREFIX fppPreProcess(REG(a0) struct fppTag *);
