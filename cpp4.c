@@ -74,7 +74,7 @@ ReturnCode dodefine(struct Global *global)
   int c;
   DEFBUF *dp;	/* -> new definition	*/
   int isredefine;	/* TRUE if redefined	*/
-  char *old;		/* Remember redefined	*/
+  char *old = NULL;		/* Remember redefined	*/
   ReturnCode ret;
 #if OK_CONCAT
   int quoting;	/* Remember we saw a #	*/
@@ -314,7 +314,7 @@ ReturnCode textput(struct Global *global, char *text)
    * Put the string in the parm[] buffer.
    */
 
-  int size;
+  size_t size;
   
   size = strlen(text) + 1;
   if ((global->parmp + size) >= &global->parm[NPARMWORK]) {
@@ -559,7 +559,7 @@ ReturnCode expstuff(struct Global *global,
   int c;		/* Current character	*/
   char *inp;		/* -> repl string	*/
   char *defp;		/* -> macro output buff */
-  int size;		/* Actual parm. size	*/
+  size_t size;		/* Actual parm. size	*/
   char *defend;		/* -> output buff end	*/
   int string_magic;	/* String formal hack	*/
   FILEINFO *file;	/* Funny #include	*/

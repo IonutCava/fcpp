@@ -193,7 +193,7 @@ ReturnCode macroid(struct Global *global, int *c)
   if (global->infile != NULL && global->infile->fp != NULL)
     global->recursion = 0;
   while (type[*c] == LET && (dp = lookid(global, *c)) != NULL) {
-    if(ret=expand(global, dp))
+    if((ret=expand(global, dp)))
       return(ret);
     *c = get(global);
   }
@@ -482,13 +482,14 @@ char *savestring(struct Global *global, char *text)
    */
 
   char *result;
+  (void)global; // BK - not used but causes warning.
   result = malloc(strlen(text) + 1);
   strcpy(result, text);
   return (result);
 }
 
 ReturnCode getfile(struct Global *global,
-                   int bufsize, /* Line or define buffer size   */
+	               size_t bufsize, /* Line or define buffer size   */
                    char *name,
                    FILEINFO **file) /* File or macro name string        */
 {
@@ -496,7 +497,7 @@ ReturnCode getfile(struct Global *global,
    * Common FILEINFO buffer initialization for a new file or macro.
    */
 
-  int size;
+	size_t size;
 
   size = strlen(name);                          /* File/macro name      */
 
@@ -538,7 +539,7 @@ DEFBUF *lookid(struct Global *global,
   int nhash;
   DEFBUF *dp;
   int ct;
-  int temp;
+	int temp = 0;
   int isrecurse;        /* For #define foo foo  */
 
   nhash = 0;
@@ -583,12 +584,12 @@ DEFBUF *defendel(struct Global *global,
   char *np;
   int nhash;
   int temp;
-  int size;
+	size_t size;
 
   for (nhash = 0, np = name; *np != EOS;)
     nhash += *np++;
   size = (np - name);
-  nhash += size;
+	nhash += (int)size;
   prevp = &global->symtab[nhash % SBSIZE];
   while ((dp = *prevp) != (DEFBUF *) NULL) {
     if (dp->hash == nhash
