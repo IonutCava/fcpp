@@ -92,6 +92,8 @@ struct Library *FPPBase=NULL;
 #ifdef BSD
 #include <sys/unistd.h> /* for BSD systems (SUN OS at least) */
 #endif
+#else
+#include "cppdef.h"
 #endif
 #define PREFIX
 #define REG(x)
