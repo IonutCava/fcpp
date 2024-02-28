@@ -267,7 +267,7 @@
 #endif
 
 #ifndef BLK_NEST
-#define BLK_NEST		32
+#define BLK_NEST		64
 #endif
 
 

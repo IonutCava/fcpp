@@ -35,7 +35,6 @@
  *
  */
 
-#include "cppdef.h"
 
 struct fppTag {
   int tag;
@@ -160,4 +159,4 @@ struct fppTag {
 /* Depends function: */
 #define FPPTAG_DEPENDS 34 /* data is an depends funtion */
 
-int PREFIX fppPreProcess(REG(a0) struct fppTag *);
+int fppPreProcess(struct fppTag *);
